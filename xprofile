@@ -1,0 +1,9 @@
+setxkbmap us
+nitrogen --head=0 --set-zoom-fill --random
+nitrogen --head=1 --set-zoom-fill --random
+xrandr --output DisplayPort-2 --mode 1920x1080 --rate 144
+xrandr --output HDMI-A-0 --mode 1920x1080 --rate 60
+
+picom -f --experimental-backend -b &
+flameshot &
+
