@@ -1,0 +1,10 @@
+#! /bin/bash
+
+chosen=$(printf "⏻ Power Off\n🗘 Restart\n🔒 Lock" | rofi -dmenu -show-icons -lines 8 -columns 3 -eh 1 -width 74 -padding 200 -opacity "100")
+
+case "$chosen" in
+    "⏻ Power Off") doas poweroff ;;
+    "🗘 Restart") doas reboot ;;
+    "🔒 Lock") doas slock ;;
+    *) exit 1 ;;
+esac

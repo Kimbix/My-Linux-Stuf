@@ -1,0 +1,17 @@
+#! /bin/bash
+
+CONF="/home/humberto/.config"
+chosen=$(printf "All\nAlacritty\nFish\ngtk-3.0\ni3\nPolybar\nAutostart\nRofi\nPicom" | rofi -dmenu -show-icons -lines 8 -columns 3 -eh 1 -width 74 -padding 200 -opacity "100")
+
+case "$chosen" in
+    "All") code $CONF ;;
+    "Alacritty") code $CONF/alacritty/alacritty.yml ;;
+    "Fish") code $CONF/fish/config.fish ;;
+    "gtk-3.0") code $CONF/gtk-3.0/settings.ini ;;
+    "i3") code $CONF/i3/config ;;
+    "Polybar") code $CONF/polybar/config ;;
+    "Autostart") code $CONF/polybar/launch.sh ;;
+    "Rofi") code $CONF/rofi ;;
+    "Picom") code $CONF/picom.conf ;;
+    *) exit 1 ;;
+esac

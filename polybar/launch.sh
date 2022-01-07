@@ -22,6 +22,13 @@ setxkbmap -layout us,es
 setxkbmap -option 'grp:alt_space_toggle'
 
 ## Syncs the configuration files with the git repo
-rsync /home/humberto/.config/polybar/config /home/humberto/Documents/Repos/My-Linux-Stuf/polybar/config
-rsync /home/humberto/.config/i3/config /home/humberto/Documents/Repos/My-Linux-Stuf/i3/config
-rsync /home/humberto/.config/polybar/launch.sh /home/humberto/Documents/Repos/My-Linux-Stuf/polybar/launch.sh
+CONF='/home/humberto/.config'
+REPO='/home/humberto/Documents/Repos/My-Linux-Stuf'
+rsync $CONF/polybar/config $REPO/polybar/config
+rsync $CONF/polybar/launch.sh $REPO/polybar/launch.sh
+
+rsync $CONF/i3/config $REPO/i3/config
+
+rsync $CONF/rofi/config.rasi $REPO/rofi/config.rafi
+rsync $CONF/rofi/configlauncher $REPO/rofi/configlauncher
+rsync $CONF/rofi/powermenu $REPO/rofi/powermenu

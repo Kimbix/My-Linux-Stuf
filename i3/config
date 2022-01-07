@@ -63,13 +63,15 @@ floating_modifier $mod
 bindsym $mod+Return     exec i3-sensible-terminal
 bindsym $mod+b          exec google-chrome-stable
 bindsym $mod+c          exec code
+bindsym $mod+Control+c  exec --no-startup-id /home/humberto/.config/rofi/configlauncher
 bindsym $mod+d          exec discord
 bindsym $mod+f          exec nautilus
 bindsym $mod+m          exec spotify
 bindsym $mod+Shift+m    exec multimc
 bindsym $mod+s          exec steam
-bindsym $mod+space      exec rofi -show drun
-bindsym $mod+Tab        exec rofi -show
+bindsym $mod+space      exec --no-startup-id rofi -show drun -show-icons -lines 8 -columns 3 -eh 1 -width 74 -padding 200 -opacity "100"
+bindsym $mod+Tab        exec --no-startup-id rofi -show
+bindsym $mod+BackSpace  exec --no-startup-id /home/humberto/.config/rofi/powermenu
 
 # Close focused window
 bindsym Control+Shift+c kill
