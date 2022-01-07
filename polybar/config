@@ -1,0 +1,525 @@
+[colors]
+background = #44000000
+background-alt = #000000
+primary = #fff
+alert = #f7768e
+
+[bar/top]
+bottom = false
+monitor = DisplayPort-2
+
+background = ${colors.background}
+
+line-size = 4
+line-color = #f00
+
+border-size = 0
+border-color= #000000
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = "Source Code Pro:size=10:bold:antialias=true;1"
+
+modules-left = i3
+modules-center = 
+modules-right = spotify xkeyboard pulseaudio date
+
+tray-position = right
+tray-padding = 2
+tray-background = #88222222
+
+[bar/top_second]
+bottom = false
+monitor = HDMI-A-0
+
+background = ${colors.background}
+
+line-size = 4
+line-color = #f00
+
+border-size = 0
+border-color= #000000
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = "Source Code Pro:size=10:bold:antialias=true;1"
+
+modules-left = 
+modules-center = wired-network cpu temperature memory
+modules-right = 
+
+wm-restack = i3
+
+; 888b     d888  .d88888b.  8888888b.  888     888 888      8888888888 .d8888b.  
+; 8888b   d8888 d88P" "Y88b 888  "Y88b 888     888 888      888       d88P  Y88b 
+; 88888b.d88888 888     888 888    888 888     888 888      888       Y88b.      
+; 888Y88888P888 888     888 888    888 888     888 888      8888888    "Y888b.   
+; 888 Y888P 888 888     888 888    888 888     888 888      888           "Y88b. 
+; 888  Y8P  888 888     888 888    888 888     888 888      888             "888 
+; 888   "   888 Y88b. .d88P 888  .d88P Y88b. .d88P 888      888       Y88b  d88P 
+; 888       888  "Y88888P"  8888888P"   "Y88888P"  88888888 8888888888 "Y8888P"  
+
+;  .d8888b.  8888888b.   .d88888b. 88888888888 8888888 8888888888 Y88b   d88P 
+; d88P  Y88b 888   Y88b d88P" "Y88b    888       888   888         Y88b d88P  
+; Y88b.      888    888 888     888    888       888   888          Y88o88P   
+;  "Y888b.   888   d88P 888     888    888       888   8888888       Y888P    
+;     "Y88b. 8888888P"  888     888    888       888   888            888     
+;       "888 888        888     888    888       888   888            888     
+; Y88b  d88P 888        Y88b. .d88P    888       888   888            888     
+;  "Y8888P"  888         "Y88888P"     888     8888888 888            888     
+
+[module/spotify]
+type = custom/script
+format-underline = #1ed760
+format-foreground = #1ed760
+format-background = #88222222
+format-padding = 2
+interval = 1
+
+exec = spotifyc -f "{{ title }}" -o
+exec-if = pgrep -x spotify
+
+label = %output:0::%
+format = %{A1:spotifyc -p:}◄%{A} <label> %{A1:spotifyc -n:}►%{A}
+
+click-left = spotifyc -c
+click-right = spotifyc -v t
+; adjust this if you have enabled natural scrolling
+scroll-up = spotifyc -v '+5'
+scroll-down = spotifyc -v '-5'
+
+
+;        d8888 888     888 8888888b. 8888888 .d88888b.  
+;       d88888 888     888 888  "Y88b  888  d88P" "Y88b 
+;      d88P888 888     888 888    888  888  888     888 
+;     d88P 888 888     888 888    888  888  888     888 
+;    d88P  888 888     888 888    888  888  888     888 
+;   d88P   888 888     888 888    888  888  888     888 
+;  d8888888888 Y88b. .d88P 888  .d88P  888  Y88b. .d88P 
+; d88P     888  "Y88888P"  8888888P" 8888888 "Y88888P"  
+
+[module/pulseaudio]
+type = internal/pulseaudio
+format-volume-underline = #fdfd96
+format-volume-foreground = #fdfd96
+format-volume-padding = 2
+
+padding-x = 2
+format-volume-background = #88222222
+
+; Allos going over 100% Volume
+use-ui-max = true
+
+; Volume Increase / Decrease Interval
+interval = 5
+
+format-volume = <label-volume>
+label-volume = Vol: %percentage%%
+
+label-muted = Muted
+format-muted-foreground = #666
+format-muted-underline = #666
+format-muted-background = #88222222
+format-muted-padding = 2
+
+; Right and Middle click
+click-right = pavucontrol
+; click-middle = 
+
+
+; 88888888888 8888888888 888b     d888 8888888b.  8888888888 8888888b.         d8888 88888888888 888     888 8888888b.  8888888888 
+;     888     888        8888b   d8888 888   Y88b 888        888   Y88b       d88888     888     888     888 888   Y88b 888        
+;     888     888        88888b.d88888 888    888 888        888    888      d88P888     888     888     888 888    888 888        
+;     888     8888888    888Y88888P888 888   d88P 8888888    888   d88P     d88P 888     888     888     888 888   d88P 8888888    
+;     888     888        888 Y888P 888 8888888P"  888        8888888P"     d88P  888     888     888     888 8888888P"  888        
+;     888     888        888  Y8P  888 888        888        888 T88b     d88P   888     888     888     888 888 T88b   888        
+;     888     888        888   "   888 888        888        888  T88b   d8888888888     888     Y88b. .d88P 888  T88b  888        
+;     888     8888888888 888       888 888        8888888888 888   T88b d88P     888     888      "Y88888P"  888   T88b 8888888888 
+
+[module/temperature]
+type = internal/temperature
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 0.5
+
+; Thermal zone to use
+; To list all the zone types, run 
+; $ for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
+; Default: 0
+thermal-zone = /sys/class/thermal/thermal_zone0
+
+; Full path of temperature sysfs path
+; Use `sensors` to find preferred temperature source, then run
+; $ for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
+; to find path to desired file
+; Default reverts to thermal zone setting
+hwmon-path = /sys/devices/virtual/thermal/thermal_zone0/hwmon2/temp1_input
+
+; Base temperature for where to start the ramp (in degrees celsius)
+; Default: 0
+base-temperature = 0
+
+; Threshold temperature to display warning label (in degrees celsius)
+; Default: 80
+warn-temperature = 80
+
+; Whether or not to show units next to the temperature tokens (°C, °F)
+; Default: true
+units = false
+
+; Available tags:
+;   <label> (default)
+;   <ramp>
+format = <label>
+
+; Available tags:
+;   <label-warn> (default)
+;   <ramp>
+format-warn = <label-warn>
+
+; Available tokens:
+;   %temperature% (deprecated)
+;   %temperature-c%   (default, temperature in °C)
+;   %temperature-f%   (temperature in °F)
+label = TEMP %temperature-c%C°
+label-foreground = #ffb347
+label-underline = #ffb347
+label-background = #88222222
+label-padding = 2
+
+; Available tokens:
+;   %temperature% (deprecated)
+;   %temperature-c%   (default, temperature in °C)
+;   %temperature-f%   (temperature in °F)
+label-warn = TEMP %temperature-c%
+label-warn-foreground = #f00
+label-warn-underline = #f00
+label-warn-padding = 2
+
+
+; 8888888b.        d8888 88888888888 8888888888 
+; 888  "Y88b      d88888     888     888        
+; 888    888     d88P888     888     888        
+; 888    888    d88P 888     888     8888888    
+; 888    888   d88P  888     888     888        
+; 888    888  d88P   888     888     888        
+; 888  .d88P d8888888888     888     888        
+; 8888888P" d88P     888     888     8888888888 
+
+[module/date]
+type = internal/date
+format-underline = #ffffff
+format-foreground = #ffffff
+format-background = #88222222
+format-padding = 2
+
+; Seconds to sleep between updates
+; Default: 1.0
+interval = 1.0
+
+date = %A, %d %B %Y
+time = %H:%M:%S
+
+; Available tags:
+;   <label> (default)
+format = <label>
+
+; Available tokens:
+;   %date%
+;   %time%
+; Default: %date%
+label = %date% %time%
+
+
+; 888    d8P  8888888888 Y88b   d88P 888888b.    .d88888b.        d8888 8888888b.  8888888b.  
+; 888   d8P   888         Y88b d88P  888  "88b  d88P" "Y88b      d88888 888   Y88b 888  "Y88b 
+; 888  d8P    888          Y88o88P   888  .88P  888     888     d88P888 888    888 888    888 
+; 888d88K     8888888       Y888P    8888888K.  888     888    d88P 888 888   d88P 888    888 
+; 8888888b    888            888     888  "Y88b 888     888   d88P  888 8888888P"  888    888 
+; 888  Y88b   888            888     888    888 888     888  d88P   888 888 T88b   888    888 
+; 888   Y88b  888            888     888   d88P Y88b. .d88P d8888888888 888  T88b  888  .d88P 
+; 888    Y88b 8888888888     888     8888888P"   "Y88888P" d88P     888 888   T88b 8888888P"  
+
+[module/xkeyboard]
+type = internal/xkeyboard
+
+; List of indicators to ignore
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+
+; Available tags:
+;   <label-layout> (default)
+;   <label-indicator> (default)
+format = <label-layout>
+format-spacing = 0
+
+format-foreground = #B391E1
+format-underline = #B391E1
+format-background = #88222222
+
+; Available tokens:
+;   %layout%
+;   %name%
+;   %number%
+;   %icon%
+;   %variant% (unreleased)
+; Default: %layout%
+label-layout = %name%
+label-layout-padding = 2
+
+; Available tokens:
+;   %name%
+; Default: %name%
+; @deprecated, use label-indicator-on
+label-indicator = %name%
+
+
+;  .d8888b.  8888888b.  888     888 
+; d88P  Y88b 888   Y88b 888     888 
+; 888    888 888    888 888     888 
+; 888        888   d88P 888     888 
+; 888        8888888P"  888     888 
+; 888    888 888        888     888 
+; Y88b  d88P 888        Y88b. .d88P 
+;  "Y8888P"  888         "Y88888P"  
+
+[module/cpu]
+type = internal/cpu
+
+; Interval Between Updates
+interval = 5
+
+format = <label>
+label = CPU: %percentage%%
+label-foreground = #ff6961
+label-underline = #ff6961
+label-background = #88222222
+label-padding = 2
+
+
+; 888b     d888 8888888888 888b     d888  .d88888b.  8888888b. Y88b   d88P 
+; 8888b   d8888 888        8888b   d8888 d88P" "Y88b 888   Y88b Y88b d88P  
+; 88888b.d88888 888        88888b.d88888 888     888 888    888  Y88o88P   
+; 888Y88888P888 8888888    888Y88888P888 888     888 888   d88P   Y888P    
+; 888 Y888P 888 888        888 Y888P 888 888     888 8888888P"     888     
+; 888  Y8P  888 888        888  Y8P  888 888     888 888 T88b      888     
+; 888   "   888 888        888   "   888 Y88b. .d88P 888  T88b     888     
+; 888       888 8888888888 888       888  "Y88888P"  888   T88b    888     
+
+[module/memory]
+type = internal/memory
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3
+
+; Available tags:
+;   <label> (default)
+;   <bar-used>
+;   <bar-free>
+;   <ramp-used>
+;   <ramp-free>
+;   <bar-swap-used>
+;   <bar-swap-free>
+;   <ramp-swap-used>
+;   <ramp-swap-free>
+format = <label> <bar-used>
+format-background = #88222222
+format-foreground = #77dd77
+format-underline = #77dd77
+format-padding = 2
+
+; Available tokens:
+;   %percentage_used% (default)
+;   %percentage_free%
+;   %gb_used%
+;   %gb_free%
+;   %gb_total%
+;   %mb_used%
+;   %mb_free%
+;   %mb_total%
+;   %percentage_swap_used%
+;   %percentage_swap_free%
+;   %mb_swap_total%
+;   %mb_swap_free%
+;   %mb_swap_used%
+;   %gb_swap_total%
+;   %gb_swap_free%
+;   %gb_swap_used%
+
+label = RAM %gb_used% / %gb_free%
+
+; Only applies if <bar-used> is used
+bar-used-indicator =
+bar-used-width = 50
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = I
+bar-used-empty = I
+bar-used-empty-foreground = #444444
+
+
+; 8888888 888b    888 88888888888 8888888888 8888888b.  888b    888 8888888888 88888888888 
+;   888   8888b   888     888     888        888   Y88b 8888b   888 888            888     
+;   888   88888b  888     888     888        888    888 88888b  888 888            888     
+;   888   888Y88b 888     888     8888888    888   d88P 888Y88b 888 8888888        888     
+;   888   888 Y88b888     888     888        8888888P"  888 Y88b888 888            888     
+;   888   888  Y88888     888     888        888 T88b   888  Y88888 888            888     
+;   888   888   Y8888     888     888        888  T88b  888   Y8888 888            888     
+; 8888888 888    Y888     888     8888888888 888   T88b 888    Y888 8888888888     888     
+
+[module/wired-network]
+type = internal/network
+interface = enp42s0
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3.0
+
+; Test connectivity every Nth update
+; A value of 0 disables the feature
+; NOTE: Experimental (needs more testing)
+; Default: 0
+;ping-interval = 3
+
+; @deprecated: Define min width using token specifiers (%downspeed:min% and %upspeed:min%)
+; Minimum output width of upload/download rate
+; Default: 3
+udspeed-minwidth = 5
+
+; Accumulate values from all interfaces
+; when querying for up/downspeed rate
+; Default: false
+accumulate-stats = true
+
+; Consider an `UNKNOWN` interface state as up.
+; Some devices like USB network adapters have 
+; an unknown state, even when they're running
+; Default: false
+unknown-as-up = true
+
+; Available tags:
+;   <label-connected> (default)
+;   <ramp-signal>
+format-connected = <label-connected>
+
+; Available tags:
+;   <label-disconnected> (default)
+format-disconnected = <label-disconnected>
+
+; All labels support the following tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %local_ip6% [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
+;   %linkspeed% [wired]
+
+; Default: %ifname% %local_ip%
+label-connected = Ip: %local_ip% %downspeed%▼ %upspeed%▲
+label-connected-foreground = #A4D8D8
+label-connected-underline = #A4D8D8
+label-connected-background = #88222222
+label-connected-padding = 2
+
+; Default: (none)
+format-disconnected-foreground = #666
+format-disconnected-underline = #666
+format-disconnected-background = #88222222
+format-disconnected-padding = 2
+
+
+; 8888888 .d8888b.  
+;   888  d88P  Y88b 
+;   888       .d88P 
+;   888      8888"  
+;   888       "Y8b. 
+;   888  888    888 
+;   888  Y88b  d88P 
+; 8888888 "Y8888P"  
+
+[module/i3]
+type = internal/i3
+
+; Only shows workspaces on the same screen as the bar
+; [Keep off to show all active workspaces regardless of monitor]
+pin-workspaces = false
+
+; Removes the :# from the workspace name
+strip-wsnumbers = true
+
+; Sorts group by index
+index-sort = true
+
+; Click focuses workspace
+enable-click = false
+
+; Scroll Cycles trough workspace
+; Wrap the scroll
+; Sets scroll direction
+enable-scroll = false
+wrapping-scroll = false
+reverse-scroll = false
+
+; ws-icon-[0-9]+ = <label>;<icon>
+; NOTE: The <label> needs to match the name of the i3 workspace
+; Neither <label> nor <icon> can contain a semicolon (;)
+ws-icon-0 = 1:INTR;1
+ws-icon-1 = 2:CODE;2
+ws-icon-2 = 3:DISC;3
+ws-icon-3 = 4:GAME;4
+ws-icon-4 = 5:SPOT;5
+ws-icon-default = 0
+; NOTE: You cannot skip icons, e.g. to get a ws-icon-6
+; you must also define a ws-icon-5.
+; NOTE: Icon will be available as the %icon% token inside label-*
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon% %name%
+label-focused = %icon% %name%
+label-unfocused = %icon% %name%
+label-visible = %icon% %name%
+label-urgent = %icon% %name%
+
+; Focused Settings
+label-focused-foreground = #ffffff
+label-focused-background = #aa222222
+label-focused-underline = #ffffff
+label-focused-padding = 1
+
+; Unfocused Settings
+label-unfocused-background = #88222222
+label-unfocused-padding = 1
+
+; Visible Settings
+label-visible-underline = #ffffff
+label-visible-background = #88222222
+label-visible-padding = 1
+
+; Urgent Settings
+label-urgent-foreground = #ffffff
+label-urgent-background = #66ff0000
+label-urgent-underline = #ff0000
+label-urgent-padding = 1
+
+; Separator in between workspaces
+label-separator = |
+label-separator-padding = 1
+label-separator-foreground = #ffffff
