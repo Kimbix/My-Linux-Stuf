@@ -60,14 +60,16 @@ bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT
 # Mouse + Mod4 to move floating windows
 floating_modifier $mod
 
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+b      exec google-chrome-stable
-bindsym $mod+c      exec code
-bindsym $mod+d      exec discord
-bindsym $mod+f      exec nautilus
-bindsym $mod+s      exec steam
-bindsym $mod+space  exec rofi -show drun
-bindsym $mod+Tab    exec rofi -show
+bindsym $mod+Return     exec i3-sensible-terminal
+bindsym $mod+b          exec google-chrome-stable
+bindsym $mod+c          exec code
+bindsym $mod+d          exec discord
+bindsym $mod+f          exec nautilus
+bindsym $mod+m          exec spotify
+bindsym $mod+Shift+m    exec multimc
+bindsym $mod+s          exec steam
+bindsym $mod+space      exec rofi -show drun
+bindsym $mod+Tab        exec rofi -show
 
 # Close focused window
 bindsym Control+Shift+c kill
@@ -102,7 +104,10 @@ set $ws5 "5:SPOT"
 assign [class=Google-chrome]                 $ws1
 assign [class=Code]                          $ws2
 assign [class=discord]                       $ws3
+
+# Gaming
 assign [class=Steam]                         $ws4
+assign [class=MultiMC]                       $ws4
 # Spotify needs special treatment because fuck the user
 for_window [class=Spotify] move to workspace $ws5
 
