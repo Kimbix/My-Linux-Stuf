@@ -1,7 +1,7 @@
 #! /bin/bash
 
 CONF="/home/humberto/.config"
-chosen=$(printf "All\nAlacritty\nFish\ngtk-3.0\ni3\nPolybar\nAutostart\nRofi\nPicom" | rofi -dmenu -show-icons -lines 8 -columns 3 -eh 1 -width 74 -padding 200 -opacity "100")
+chosen=$(printf "All\nAlacritty\nFish\ngtk-3.0\ni3\nPolybar\nAutostart\nRofi\nPicom" | rofi -dmenu -theme configLauncher -i)
 
 case "$chosen" in
     "All") code $CONF ;;
